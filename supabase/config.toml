@@ -1,0 +1,7 @@
+project_id = "supabase-tasks"
+
+[functions.linear-to-slack]
+enabled = true
+verify_jwt = false
+import_map = "./functions/linear-to-slack/deno.json"
+entrypoint = "./functions/linear-to-slack/index.ts"

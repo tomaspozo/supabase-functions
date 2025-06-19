@@ -1,0 +1,41 @@
+{
+  "action": "create",
+  "actor": {
+    "id": "87f88d98-4bd6-4d6e-9a30-3e5e496a9904",
+    "name": "Tomás Pozo",
+    "email": "tomaspozogarzon@gmail.com",
+    "avatarUrl": "https://public.linear.app/87f88d98-4bd6-4d6e-9a30-3e5e496a9904/aad9bca1-d22a-43f2-bf5f-a232d3b975b2",
+    "url": "https://linear.app/xbase/profiles/tomaspozogarzon",
+    "type": "user"
+  },
+  "createdAt": "2025-06-18T20:59:35.782Z",
+  "data": {
+    "id": "2104dfed-2aab-438c-b2a9-4d5558c53a55",
+    "createdAt": "2025-06-18T20:59:35.782Z",
+    "updatedAt": "2025-06-18T20:59:35.782Z",
+    "body": "This is a project update about Project X, on June 18, 3:59 pm EC time 😄 \n\n![Screenshot 2025-06-18 at 3.39.06 PM.png](https://uploads.linear.app/0936557c-a86c-4c73-a8a4-cbf258c651cb/14ff449a-6e39-476f-8c1e-56763352032c/2f128075-0bde-432d-87c6-45d2e948e7fb)\n\nThis looks neat! right?",
+    "reactionData": [],
+    "bodyData": "{\"type\":\"doc\",\"content\":[{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"This is a project update about Project X, on June 18, 3:59 pm EC time \"},{\"type\":\"emoji\",\"attrs\":{\"label\":\"😄\",\"type\":\"native\",\"src\":null,\"name\":\":smile:\"}},{\"type\":\"text\",\"text\":\" \"}]},{\"type\":\"image\",\"attrs\":{\"src\":\"https://uploads.linear.app/0936557c-a86c-4c73-a8a4-cbf258c651cb/14ff449a-6e39-476f-8c1e-56763352032c/2f128075-0bde-432d-87c6-45d2e948e7fb\",\"alt\":null,\"title\":\"Screenshot 2025-06-18 at 3.39.06 PM.png\",\"attribution\":null,\"originalSrc\":null,\"width\":1144,\"height\":495,\"displayWidth\":null}},{\"type\":\"paragraph\",\"content\":[{\"type\":\"text\",\"text\":\"This looks neat! right?\"}]}]}",
+    "slugId": "2104dfed",
+    "projectId": "4613e0dd-79ae-4235-ab59-3b6a1c7b223f",
+    "health": "onTrack",
+    "userId": "87f88d98-4bd6-4d6e-9a30-3e5e496a9904",
+    "project": {
+      "id": "4613e0dd-79ae-4235-ab59-3b6a1c7b223f",
+      "name": "Project X",
+      "url": "https://linear.app/xbase/project/project-x-fb5acd87ea06"
+    },
+    "user": {
+      "id": "87f88d98-4bd6-4d6e-9a30-3e5e496a9904",
+      "name": "Tomás Pozo",
+      "email": "tomaspozogarzon@gmail.com",
+      "avatarUrl": "https://public.linear.app/87f88d98-4bd6-4d6e-9a30-3e5e496a9904/aad9bca1-d22a-43f2-bf5f-a232d3b975b2",
+      "url": "https://linear.app/xbase/profiles/tomaspozogarzon"
+    }
+  },
+  "url": "https://linear.app/xbase/project/project-x-fb5acd87ea06/updates#projectUpdate-2104dfed",
+  "type": "ProjectUpdate",
+  "organizationId": "0936557c-a86c-4c73-a8a4-cbf258c651cb",
+  "webhookTimestamp": 1750280376016,
+  "webhookId": "b95db979-6f7b-40b2-89f0-cfee4d2ba7ba"
+}
