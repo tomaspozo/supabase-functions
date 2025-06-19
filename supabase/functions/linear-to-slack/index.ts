@@ -37,6 +37,9 @@ Deno.serve(async (req: Request) => {
     const rawBody = await req.text();
     const payload = JSON.parse(rawBody);
 
+    // If SKIP_VALIDATION is set, skip validation, otherwise validate
+    // timestamp and signature folowing Linear's documentation:
+    // https://linear.app/developers/webhooks#securing-webhooks
     if (!SKIP_VALIDATION) {
       const timestamp = payload.webhookTimestamp;
       const now = Date.now();
@@ -109,14 +112,3 @@ Deno.serve(async (req: Request) => {
     return new Response("Internal Server Error", { status: 500 });
   }
 });
-/* To invoke locally:
-
-  1. Run `supabase start` (see: https://supabase.com/docs/reference/cli/supabase-start)
-  2. Make an HTTP request:
-
-  curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/linear-to-slack' \
-    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0' \
-    --header 'Content-Type: application/json' \
-    --data '{"name":"Functions"}'
-
-*/
