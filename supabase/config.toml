@@ -1,4 +1,4 @@
-project_id = "supabase-tasks"
+project_id = "supabase-functions"
 
 [functions.linear-to-slack]
 enabled = true
