@@ -38,5 +38,5 @@ export async function fetchProjectInitiatives(projectId: string) {
         throw new Error("Failed to fetch initiatives");
     }
 
-    return data.project.initiatives;
+    return data.project.initiatives.nodes;
 }

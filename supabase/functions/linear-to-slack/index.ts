@@ -2,7 +2,10 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 import { verifySignature } from "./lib/verifySignature.ts";
 import { fetchProjectInitiatives } from "./lib/linear.ts";
-import { buildSlackMessage, sendSlackNotification } from "./lib/slack.ts";
+import {
+  buildProjectUpdateSlackMessage,
+  sendSlackNotification,
+} from "./lib/slack.ts";
 
 Deno.serve(async (req: Request) => {
   const WEBHOOK_SECRET = Deno.env.get("LINEAR_WEBHOOK_SECRET")!;
@@ -28,16 +31,11 @@ Deno.serve(async (req: Request) => {
       if (!valid) return new Response("Invalid signature", { status: 401 });
     }
 
-    const { actor, createdAt, data: { body, project }, url } = payload;
+    const initiatives = await fetchProjectInitiatives(payload.data.projectId);
 
-    const initiatives = await fetchProjectInitiatives(project.id);
-
-    const message = buildSlackMessage({
-      actor,
-      createdAt,
-      body,
-      project,
-      updateUrl: url,
+    const message = buildProjectUpdateSlackMessage({
+      ...payload.data,
+      updateUrl: payload.url,
       initiatives,
     });
 
