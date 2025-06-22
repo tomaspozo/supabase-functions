@@ -1,5 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
+const LINEAR_API_URL = "https://api.linear.app/graphql";
+
 async function verifySignature(
   secret: string,
   rawBody: string,
@@ -22,6 +24,51 @@ async function verifySignature(
   ).join("");
 
   return signature === signatureHeader;
+}
+
+async function fetchProjectInitiatives(projectId: string) {
+  const query = `
+    query GetProjectInitiatives($id: String!) {
+      project(id: $id) {
+        id
+        name
+        initiatives {
+          nodes {
+            id
+            name
+            targetDate
+            status
+          }
+        }
+      }
+    }
+  `;
+
+  const apiKey = Deno.env.get("LINEAR_API_KEY");
+  if (!apiKey) {
+    throw new Error("Missing LINEAR_API_KEY in environment variables");
+  }
+
+  const res = await fetch(LINEAR_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: apiKey,
+    },
+    body: JSON.stringify({
+      query,
+      variables: { id: projectId },
+    }),
+  });
+
+  const { data, errors } = await res.json();
+
+  if (!res.ok || errors) {
+    console.error("Failed to fetch initiatives from Linear API", errors);
+    throw new Error("Failed to fetch initiatives from Linear API");
+  }
+
+  return data.project.initiatives;
 }
 
 Deno.serve(async (req: Request) => {
@@ -65,6 +112,11 @@ Deno.serve(async (req: Request) => {
       url,
     } = payload;
 
+    const initiatives = await fetchProjectInitiatives(project.id);
+    const initiativeLabels = initiatives.nodes
+      .map((i: any) => `*${i.name}*`)
+      .join(", ");
+
     const slackMessage = {
       blocks: [
         {
@@ -75,6 +127,19 @@ Deno.serve(async (req: Request) => {
               `*New update for <${project.url}|${project.name}>*:\n\n${body}\n\n<${url}|View update →>`,
           },
         },
+        ...(initiativeLabels
+          ? [
+            {
+              type: "context",
+              elements: [
+                {
+                  type: "mrkdwn",
+                  text: `🏷️ Initiatives: ${initiativeLabels}`,
+                },
+              ],
+            },
+          ]
+          : []),
         {
           type: "context",
           elements: [
